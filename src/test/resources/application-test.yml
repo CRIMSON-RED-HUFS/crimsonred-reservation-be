@@ -1,0 +1,16 @@
+logging:
+  level:
+    root: WARN
+spring:
+  main:
+    banner-mode: "off"
+management:
+  health:
+    mail:
+      enabled: false
+app:
+  base-url: http://localhost:3000
+  mail-from: crimsonred@hufs.ac.kr
+  webhook-url: ""
+  announcements-enabled: false
+  announcement-cron: "0 0 23 * * SUN"

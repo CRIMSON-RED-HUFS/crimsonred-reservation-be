@@ -1,0 +1,62 @@
+app:
+  booking:
+    start-minute: 540
+    end-minute: 1350
+logging:
+  level:
+    # Duplicate-key exception messages can contain email addresses or request keys.
+    org.hibernate.orm.jdbc.error: 'OFF'
+spring:
+  application:
+    name: crimsonred-reservation
+  datasource:
+    hikari:
+      connection-timeout: 5000
+      validation-timeout: 2000
+      data-source-properties:
+        connectTimeout: 5000
+        socketTimeout: 5000
+      transaction-isolation: TRANSACTION_READ_COMMITTED
+  jpa:
+    mapping-resources: db/orm.xml
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        jdbc.time_zone: UTC
+        generate_statistics: false
+  data:
+    redis:
+      timeout: 2s
+      connect-timeout: 2s
+  session:
+    timeout: 2h
+    redis:
+      namespace: crimsonred:session
+  mail:
+    properties:
+      mail.smtp:
+        connectiontimeout: 5000
+        timeout: 5000
+        writetimeout: 5000
+server:
+  port: 8080
+  forward-headers-strategy: none
+  servlet:
+    session:
+      cookie:
+        name: CRIMSON_SESSION
+        http-only: true
+        same-site: lax
+management:
+  health:
+    mail:
+      enabled: false
+  endpoints:
+    web:
+      exposure:
+        include: health
+  endpoint:
+    health:
+      show-details: never

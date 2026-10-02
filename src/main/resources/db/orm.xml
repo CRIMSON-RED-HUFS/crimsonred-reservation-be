@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings xmlns="https://jakarta.ee/xml/ns/persistence/orm" version="3.1">
+  <entity class="com.crimsonred.reservation.auth.domain.EmailVerification" access="FIELD" metadata-complete="true">
+    <table name="email_verification"/>
+    <attributes>
+      <id name="id"><column name="id"/><generated-value strategy="IDENTITY"/></id>
+      <basic name="memberId"><column name="member_id" nullable="false"/></basic>
+      <basic name="tokenHash"><column name="token_hash" nullable="false" length="64"/></basic>
+      <basic name="expiresAt"><column name="expires_at" nullable="false"/></basic>
+      <basic name="usedAt"><column name="used_at"/></basic>
+    </attributes>
+  </entity>
+  <entity class="com.crimsonred.reservation.member.domain.Member" access="FIELD" metadata-complete="true">
+    <table name="member"/>
+    <attributes>
+      <id name="id"><column name="id"/><generated-value strategy="IDENTITY"/></id>
+      <basic name="email"><column name="email" nullable="false" length="254"/></basic>
+      <basic name="name"><column name="name" nullable="false" length="50"/></basic>
+      <basic name="passwordHash"><column name="password_hash" nullable="false"/></basic>
+      <basic name="emailVerifiedAt"><column name="email_verified_at"/></basic>
+      <basic name="membership"><column name="membership" nullable="false" length="20"/></basic>
+      <basic name="role"><column name="role" nullable="false" length="10"/></basic>
+      <basic name="rejectionReason"><column name="rejection_reason" length="500"/></basic>
+      <basic name="reviewedBy"><column name="reviewed_by"/></basic>
+      <basic name="reviewedAt"><column name="reviewed_at"/></basic>
+      <basic name="createdAt"><column name="created_at" nullable="false"/></basic>
+    </attributes>
+  </entity>
+  <entity class="com.crimsonred.reservation.booking.domain.BookingWeek" access="FIELD" metadata-complete="true">
+    <table name="booking_week"/>
+    <attributes>
+      <id name="id"><column name="id"/><generated-value strategy="IDENTITY"/></id>
+      <basic name="weekStart"><column name="week_start" nullable="false"/></basic>
+      <basic name="published"><column name="published" nullable="false"/></basic>
+      <basic name="opensAt"><column name="opens_at" nullable="false"/></basic>
+      <basic name="closesAt"><column name="closes_at" nullable="false"/></basic>
+      <basic name="automatic"><column name="automatic" nullable="false"/></basic>
+    </attributes>
+  </entity>
+  <entity class="com.crimsonred.reservation.booking.domain.BookingSlot" access="FIELD" metadata-complete="true">
+    <table name="booking_slot"/>
+    <attributes>
+      <id name="id"><column name="id"/><generated-value strategy="IDENTITY"/></id>
+      <basic name="weekId"><column name="week_id" nullable="false"/></basic>
+      <basic name="startAt"><column name="start_at" nullable="false"/></basic>
+      <basic name="endAt"><column name="end_at" nullable="false"/></basic>
+      <basic name="blocked"><column name="blocked" nullable="false"/></basic>
+      <basic name="blockReason"><column name="block_reason" length="500"/></basic>
+    </attributes>
+  </entity>
+  <entity class="com.crimsonred.reservation.booking.domain.Reservation" access="FIELD" metadata-complete="true">
+    <table name="reservation"/>
+    <attributes>
+      <id name="id"><column name="id"/><generated-value strategy="IDENTITY"/></id>
+      <basic name="memberId"><column name="member_id" nullable="false"/></basic>
+      <basic name="weekId"><column name="week_id" nullable="false"/></basic>
+      <basic name="startAt"><column name="start_at" nullable="false"/></basic>
+      <basic name="endAt"><column name="end_at" nullable="false"/></basic>
+      <basic name="rehearsalName"><column name="rehearsal_name" nullable="false" length="100"/></basic>
+      <basic name="reservationType"><column name="reservation_type" nullable="false" length="32"/><enumerated>STRING</enumerated></basic>
+      <basic name="status"><column name="status" nullable="false" length="10"/></basic>
+      <basic name="requestKey"><column name="request_key" nullable="false" length="64"/></basic>
+      <basic name="createdAt"><column name="created_at" nullable="false"/></basic>
+      <basic name="cancelledAt"><column name="cancelled_at"/></basic>
+      <basic name="cancelledBy"><column name="cancelled_by"/></basic>
+      <basic name="cancelReason"><column name="cancel_reason" length="500"/></basic>
+    </attributes>
+  </entity>
+  <entity class="com.crimsonred.reservation.booking.domain.ActiveSlotClaim" access="FIELD" metadata-complete="true">
+    <table name="active_slot_claim"/>
+    <attributes>
+      <id name="slotId"><column name="slot_id"/></id>
+      <basic name="reservationId"><column name="reservation_id" nullable="false"/></basic>
+    </attributes>
+  </entity>
+  <entity class="com.crimsonred.reservation.announcement.domain.AnnouncementDelivery" access="FIELD" metadata-complete="true">
+    <table name="announcement_delivery"/>
+    <attributes>
+      <id name="id"><column name="id"/><generated-value strategy="IDENTITY"/></id>
+      <basic name="noticeDate"><column name="notice_date" nullable="false"/></basic>
+      <basic name="status"><column name="status" nullable="false" length="15"/></basic>
+      <basic name="attempts"><column name="attempts" nullable="false"/></basic>
+      <basic name="nextAttemptAt"><column name="next_attempt_at" nullable="false"/></basic>
+      <basic name="startedAt"><column name="started_at"/></basic>
+      <basic name="messageId"><column name="message_id" length="40"/></basic>
+      <basic name="errorSummary"><column name="error_summary" length="200"/></basic>
+    </attributes>
+  </entity>
+</entity-mappings>

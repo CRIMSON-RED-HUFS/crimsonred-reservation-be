@@ -1,0 +1,38 @@
+spring:
+  datasource:
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+  jpa:
+    properties:
+      hibernate:
+        generate_statistics: ${SQL_STATISTICS:false}
+  data:
+    redis:
+      host: ${REDIS_HOST}
+      port: ${REDIS_PORT:6379}
+      password: ${REDIS_PASSWORD}
+  mail:
+    host: ${SMTP_HOST}
+    port: ${SMTP_PORT:587}
+    username: ${SMTP_USERNAME:}
+    password: ${SMTP_PASSWORD:}
+    properties:
+      mail.smtp:
+        auth: ${SMTP_AUTH:true}
+        ssl.checkserveridentity: true
+        starttls.enable: ${SMTP_STARTTLS:true}
+        starttls.required: ${SMTP_STARTTLS:true}
+server:
+  port: ${PORT:8080}
+  servlet:
+    session:
+      cookie:
+        secure: ${COOKIE_SECURE:true}
+app:
+  proxy-secret: ${PROXY_SECRET:}
+  base-url: ${APP_BASE_URL}
+  mail-from: ${MAIL_FROM}
+  webhook-url: ${DISCORD_WEBHOOK_URL:}
+  announcements-enabled: ${ANNOUNCEMENTS_ENABLED:false}
+  announcement-cron: ${ANNOUNCEMENT_CRON:0 0 23 * * SUN}
