@@ -26,7 +26,7 @@ try {
         catch { $blocked = $true }
         if (!$blocked) { throw 'Expected credential/configuration was not rejected.' }
     }
-    Remove-Item -LiteralPath $private,$localProperties,$debugDump,$buildFile,$awsExample
+    Remove-Item -LiteralPath $private,$localProperties,$debugDump,$buildFile,$awsExample -Force
     Push-Location $fixtureRoot
     try {
         & git init --quiet
